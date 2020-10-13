@@ -1,0 +1,22 @@
+---
+# tasks file for ansible-role-debug
+# Based on: https://gryzli.info/2017/12/21/ansible-debug-print-variables/
+#
+- name: Display all variables/facts known for a host
+  debug:
+    var: hostvars[inventory_hostname]
+  tags: debug_info_host
+
+# Debug Example
+#
+#   ansible-playbook --tags "debug_info" -i hosts/mvps.host test.yml
+#
+- name: Print some debug information (example)
+  vars: 
+    msg: |
+        Ansible Distribution: {{ ansible_distribution }}
+        Ansible Dist version: {{ ansible_distribution_version }}
+  debug: 
+    msg: "{{ msg.split('\n') }}"       
+  tags: debug_info
+
